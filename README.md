@@ -1,4 +1,4 @@
-# Tomato Menus
+# Filament Menus
 
 Menu View Generator Using Livewire
 
