@@ -1,0 +1,41 @@
+{
+    "name": "tomatophp/filament-menus",
+    "type": "library",
+    "description": "Menu View Generator Using Livewire",
+    "keywords": [
+        "laravel",
+        "menus",
+        "generator",
+        "url",
+        "routes",
+        "views"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TomatoPHP\\FilamentMenus\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TomatoPHP\\FilamentMenus\\FilamentMenusServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Queen Tech",
+            "email": "info@3x1.io"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "tomatophp/console-helpers": "^1.0"
+    }
+}
