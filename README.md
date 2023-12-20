@@ -1,3 +1,5 @@
+![Screenshot](./arts/screenshot.png)
+
 # Filament Menus
 
 Menu View Generator Using Livewire
