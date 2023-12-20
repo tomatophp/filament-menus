@@ -81,8 +81,6 @@ you can publish migrations file by use this command
 php artisan vendor:publish --tag="filament-menus-migrations"
 ```
 
-
-
 ## Support
 
 you can join our discord server to get support [TomatoPHP](https://discord.gg/Xqmt35Uh)
@@ -101,7 +99,7 @@ Please see [SECURITY](SECURITY.md) for more information about security.
 
 ## Credits
 
-- [Tomatophp](mailto:info@3x1.io)
+- [Fady Mondy](mailto:info@3x1.io)
 
 ## License
 
