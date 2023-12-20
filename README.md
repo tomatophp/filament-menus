@@ -15,6 +15,13 @@ after install your package please run this command
 php artisan filament-menus:install
 ```
 
+finally register the plugin on `/app/Providers/Filament/AdminPanelProvider.php`
+
+```php
+$panel->plugin(\TomatoPHP\FilamentMenus\FilamentMenusPlugin::make())
+```
+
+
 ## Usage
 
 go to route `admin/menus` and create a new menu and you will get the code of livewire component
