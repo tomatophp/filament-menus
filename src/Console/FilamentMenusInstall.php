@@ -36,12 +36,9 @@ class FilamentMenusInstall extends Command
      */
     public function handle()
     {
-        $this->info('Publish Vendor Assets');
-        $this->callSilent('optimize:clear');
-        $this->yarnCommand(['install']);
-        $this->yarnCommand(['build']);
+        $this->artisanCommand(["livewire:discover"]);
         $this->artisanCommand(["migrate"]);
         $this->artisanCommand(["optimize:clear"]);
-        $this->info('filamentMenus installed successfully.');
+        $this->info('Filament Menus installed successfully.');
     }
 }
