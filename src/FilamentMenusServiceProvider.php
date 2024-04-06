@@ -4,6 +4,7 @@ namespace TomatoPHP\FilamentMenus;
 
 use Illuminate\Support\ServiceProvider;
 
+require_once  __DIR__.'/helpers.php';
 
 class FilamentMenusServiceProvider extends ServiceProvider
 {
@@ -47,6 +48,10 @@ class FilamentMenusServiceProvider extends ServiceProvider
 
         //Register Routes
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+
+        $this->loadViewComponentsAs('filament', [
+            \TomatoPHP\FilamentMenus\Views\Menu::class,
+        ]);
 
     }
 

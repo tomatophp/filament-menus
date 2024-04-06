@@ -2,7 +2,7 @@
 
 # Filament Menus
 
-Menu View Generator Using Livewire
+Menu View Generator Using View Component
 
 ## Installation
 
@@ -18,9 +18,8 @@ php artisan filament-menus:install
 finally register the plugin on `/app/Providers/Filament/AdminPanelProvider.php`
 
 ```php
-$panel->plugin(\TomatoPHP\FilamentMenus\FilamentMenusPlugin::make())
+->plugin(\TomatoPHP\FilamentMenus\FilamentMenusPlugin::make())
 ```
-
 
 ## Usage
 
@@ -29,7 +28,7 @@ go to route `admin/menus` and create a new menu and you will get the code of liv
 you can build a menu just by using this command as a livewire component
 
 ```blade 
-@livewire('menu', ['key' => "header"])
+<x-filament-menu menu="header" />
 ```
 
 where `header` is a key of menu and you will get the code ready on the Table list of menus
@@ -37,13 +36,28 @@ where `header` is a key of menu and you will get the code ready on the Table lis
 you can use custom view ex:
 
 ```blade 
-@livewire('menu', ['key' => "header", 'view'=> "livewire.menu"])
+<x-filament-menu menu="header" view="menu-item" />
 ```
 
 by default we use Tailwind as a main view with this code
 
 ```blade
-@foreach ($menu as $item)
+@foreach ($menuItems as $item)
+<a class="text-gray-500" href="{{ $item['url'] }}" @if($item['blank']) target="_blank" @endif>
+    <span class="flex justify-between">
+        @if(isset($item['icon']) && !empty($item['icon']))
+        <x-icon class="w-4 h-4 mx-2" name="{{ $item['icon'] }}"></x-icon>
+        @endif
+        {{ $item['title'] }}
+    </span>
+</a>
+@endforeach
+```
+
+or you can use direct helper `menu($key)` to get the menu items
+
+```blade
+@foreach (menu('header') as $item)
 <a class="text-gray-500" href="{{ $item['url'] }}" @if($item['blank']) target="_blank" @endif>
     <span class="flex justify-between">
         @if(isset($item['icon']) && !empty($item['icon']))

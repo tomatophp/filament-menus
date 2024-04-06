@@ -32,4 +32,5 @@ class Menu extends Model
     protected $casts = [
         "items" => "array"
     ];
+
 }
