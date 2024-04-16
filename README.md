@@ -1,6 +1,11 @@
-![Screenshot](./arts/screenshot.png)
+![Screenshot](https://github.com/tomatophp/filament-menus/blob/master/arts/3x1io-tomato-menus.jpg)
 
 # Filament Menus
+
+[![Latest Stable Version](https://poser.pugx.org/tomatophp/filament-menus/version.svg)](https://packagist.org/packages/tomatophp/filament-menus)
+[![PHP Version Require](http://poser.pugx.org/tomatophp/filament-menus/require/php)](https://packagist.org/packages/tomatophp/filament-menus)
+[![License](https://poser.pugx.org/tomatophp/filament-menus/license.svg)](https://packagist.org/packages/tomatophp/filament-menus)
+[![Downloads](https://poser.pugx.org/tomatophp/filament-menus/d/total.svg)](https://packagist.org/packages/tomatophp/filament-menus)
 
 Menu View Generator Using View Component
 
