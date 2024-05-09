@@ -8,6 +8,7 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use TomatoPHP\FilamentIcons\Components\IconPicker;
 use TomatoPHP\FilamentMenus\Models\Menu;
 use Filament\Tables;
 use Filament\Forms\Components\Grid;
@@ -76,11 +77,9 @@ class MenuResource extends Resource
                             ->label(trans('filament-menus::messages.cols.item.route'))
                             ->searchable()
                             ->options($routeList),
-                        Forms\Components\TextInput::make('icon')
+                        IconPicker::make('icon')
                             ->label(trans('filament-menus::messages.cols.item.icon'))
-                            ->hint('icon must start with [heroicon-o-]')
-                            ->required()
-                            ->maxLength(255),
+                            ->required(),
                         Forms\Components\Toggle::make('blank')
                             ->label(trans('filament-menus::messages.cols.item.target'))
                             ->required(),
