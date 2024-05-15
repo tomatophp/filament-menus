@@ -1,5 +1,14 @@
 <?php
 
 return [
-    //You config go here...
+    "locals" => [
+        "ar" => [
+            "ar" => "العربية",
+            "en" => "الإنجليزية"
+        ],
+        "en" => [
+            "ar" => "Arabic",
+            "en" => "English"
+        ]
+    ]
 ];

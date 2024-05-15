@@ -33,4 +33,10 @@ class Menu extends Model
         "items" => "array"
     ];
 
+
+    public function menuItems()
+    {
+        return $this->hasMany(MenuItem::class, 'menu_id', 'id');
+    }
+
 }

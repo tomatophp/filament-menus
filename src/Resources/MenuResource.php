@@ -2,12 +2,15 @@
 
 namespace TomatoPHP\FilamentMenus\Resources;
 
+use App\Forms\Components\Translation;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Spatie\Permission\Models\Permission;
 use TomatoPHP\FilamentIcons\Components\IconPicker;
 use TomatoPHP\FilamentMenus\Models\Menu;
 use Filament\Tables;
@@ -16,6 +19,7 @@ use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Facades\Route;
 use TomatoPHP\FilamentMenus\Resources\MenuResource\Pages;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use TomatoPHP\FilamentMenus\Resources\MenuResource\Relations\MenuItems;
 
 class MenuResource extends Resource
 {
@@ -34,21 +38,33 @@ class MenuResource extends Resource
         return trans('filament-menus::messages.title');
     }
 
+    public static function getPluralLabel(): ?string
+    {
+        return trans('filament-menus::messages.title');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return trans('filament-menus::messages.title');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return trans('filament-menus::messages.title');
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            MenuItems::make()
+        ];
+    }
+
     public static function form(Forms\Form $form): Forms\Form
     {
-        $routeList = [];
-        $routeCollection = Route::getRoutes();
-        foreach ($routeCollection as $key => $route) {
-            if (isset($route->action['as'])) {
-                $routeList[$route->action['as']] = $route->uri;
-            } else {
-                array_push($routeList, $route->uri);
-            }
-        }
-
         return $form
             ->schema([
-                Grid::make(["default" => 1])->schema([
+                Grid::make(["default" => 3])->schema([
                     Forms\Components\TextInput::make('title')
                         ->label(trans('filament-menus::messages.cols.title'))
                         ->required()
@@ -62,29 +78,8 @@ class MenuResource extends Resource
                         ->required()
                         ->default('header')
                         ->maxLength(255),
-                    Forms\Components\Repeater::make('items')
-                        ->label(trans('filament-menus::messages.cols.item.item'))
-                        ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->label(trans('filament-menus::messages.cols.item.title'))
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('url')
-                            ->label(trans('filament-menus::messages.cols.item.url'))
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\Select::make('route')
-                            ->label(trans('filament-menus::messages.cols.item.route'))
-                            ->searchable()
-                            ->options($routeList),
-                        IconPicker::make('icon')
-                            ->label(trans('filament-menus::messages.cols.item.icon'))
-                            ->required(),
-                        Forms\Components\Toggle::make('blank')
-                            ->label(trans('filament-menus::messages.cols.item.target'))
-                            ->required(),
-                    ]),
                     Forms\Components\Toggle::make('activated')
+                        ->default(true)
                         ->label(trans('filament-menus::messages.cols.activated'))
                         ->required(),
                 ])
@@ -131,6 +126,8 @@ class MenuResource extends Resource
     {
         return [
             'index' => Pages\ManageMenus::route('/'),
+            'create' => Pages\CreateMenus::route('/create'),
+            'edit' => Pages\EditMenus::route('/{record}'),
         ];
     }
 }

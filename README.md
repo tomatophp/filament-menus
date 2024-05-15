@@ -23,10 +23,37 @@ php artisan filament-menus:install
 finally register the plugin on `/app/Providers/Filament/AdminPanelProvider.php`
 
 ```php
-->plugin(\TomatoPHP\FilamentMenus\FilamentMenusPlugin::make())
+->plugins(
+    \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'ar'])
+    \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make()
+)
 ```
 
-## Usage
+## Use as Filament Navigation
+
+you can use this package as a navigation on Filament Admin Panel
+
+```php
+use Filament\Navigation\NavigationBuilder;
+use Filament\Navigation\NavigationGroup;
+use TomatoPHP\FilamentMenus\FilamentMenuLoader;
+
+$panel->navigation(function (NavigationBuilder $builder){
+    return $builder
+        // Use Inside Group
+        ->groups([
+            NavigationGroup::make()
+                ->label('Dashboard')
+                ->items(FilamentMenuLoader::make('dashboard')),
+        ])
+        // Use Directly
+        ->items(FilamentMenuLoader::make('dashboard'));
+})
+```
+
+where `dashboard` is a key of menu.
+
+## Use as a Livewire Component
 
 go to route `admin/menus` and create a new menu and you will get the code of livewire component
 

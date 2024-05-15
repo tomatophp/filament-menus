@@ -39,6 +39,7 @@
         "tomatophp/console-helpers": "^1.1",
         "tomatophp/filament-icons": "^1.0",
         "filament/filament": "^3.0.0",
-        "filament/notifications": "^3.0.0"
+        "filament/notifications": "^3.0.0",
+        "filament/spatie-laravel-translatable-plugin": "^3.0.0"
     }
 }
