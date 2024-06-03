@@ -1,4 +1,4 @@
-![Screenshot](https://github.com/tomatophp/filament-menus/blob/master/arts/3x1io-tomato-menus.jpg)
+![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/3x1io-tomato-menus.jpg)
 
 # Filament Menus
 
