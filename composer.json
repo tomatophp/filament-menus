@@ -1,14 +1,16 @@
 {
     "name": "tomatophp/filament-menus",
     "type": "library",
-    "description": "Menu View Generator Using View Component",
+    "description": "Menu Database builder to use it as a navigation on Filament Panel or as a Livewire Component",
     "keywords": [
         "laravel",
         "menus",
         "generator",
         "url",
         "routes",
-        "views"
+        "views",
+        "filamentphp",
+        "plugin"
     ],
     "license": "MIT",
     "autoload": {
