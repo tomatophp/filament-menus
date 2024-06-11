@@ -11,9 +11,9 @@ Menu Database builder to use it as a navigation on Filament Panel or as a Livewi
 
 ## Screenshots
 
-![Menus List](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/resource.jpg)
-![Edit Menu](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/edit.jpg)
-![Menu Items](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/create-item.jpg)
+![Menus List](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/resource.png)
+![Edit Menu](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/edit.png)
+![Menu Items](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/create-item.png)
 
 ## Installation
 
