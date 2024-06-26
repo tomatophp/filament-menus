@@ -10,7 +10,7 @@
     </div>
     @if($record->has_badge)
         <div>
-            <x-filament::badge :hidden="$record->has_badge">
+            <x-filament::badge :hidden="$record->has_badge" :color="$record->badge_color">
                 {{ $record->badge[app()->getLocale()] }}
             </x-filament::badge>
         </div>

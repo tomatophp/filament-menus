@@ -137,7 +137,7 @@ class MenuItems extends RelationManager
                 IconPicker::make('icon')
                     ->label(trans('filament-menus::messages.cols.item.icon'))
                     ->required(),
-                Forms\Components\Toggle::make('blank')
+                Forms\Components\Toggle::make('new_tab')
                     ->label(trans('filament-menus::messages.cols.item.target'))
                     ->required(),
     ], $repeaterSchema))

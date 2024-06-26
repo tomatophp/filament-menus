@@ -15,7 +15,7 @@ class Menu extends Component
     )
     {
         $menu = \TomatoPHP\FilamentMenus\Models\Menu::where('key', $menu)->first();
-        $this->menuItems = collect($menu->items ?? []);
+        $this->menuItems = collect($menu->menuItems ?? []);
     }
 
     public function render()

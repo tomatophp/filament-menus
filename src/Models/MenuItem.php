@@ -19,7 +19,10 @@ class MenuItem extends Model
     protected $casts = [
         'title' => 'array',
         'badge' => 'array',
-        'permissions' => 'array'
+        'permissions' => 'array',
+        'has_badge' => 'boolean',
+        'is_route' => 'boolean',
+        'new_tab' => 'boolean',
     ];
 
     /**
