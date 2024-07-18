@@ -50,9 +50,15 @@ class MenuItems extends RelationManager
         $routeCollection = Route::getRoutes();
         foreach ($routeCollection as $key => $route) {
             if (isset($route->action['as'])) {
-                $routeList[$route->action['as']] = $route->uri;
+                $routeList[] = [
+                    "name" =>$route->action['as'],
+                    "url" => $route->uri
+                ];
             } else {
-                array_push($routeList, $route->uri);
+                $routeList[] = [
+                    "name" => $route->uri,
+                    "url" => $route->uri
+                ];
             }
         }
 
@@ -99,7 +105,7 @@ class MenuItems extends RelationManager
                     ->hidden(fn(Forms\Get $get) => $get('is_route') === false)
                     ->required(fn(Forms\Get $get) => $get('is_route') === true)
                     ->searchable()
-                    ->options($routeList),
+                    ->options(collect($routeList)->pluck('url', 'name')->toArray()),
                 Forms\Components\Toggle::make('has_badge')
                     ->default(false)
                     ->label(trans('filament-menus::messages.cols.item.has_badge'))

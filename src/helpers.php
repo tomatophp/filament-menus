@@ -5,7 +5,7 @@ if(!function_exists('menu')){
         $menu = \TomatoPHP\FilamentMenus\Models\Menu::where('key', $key)->first();
 
         if($menu){
-            return collect($menu->items);
+            return collect($menu->menuItems);
 
         }
         else {
