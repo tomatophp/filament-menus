@@ -3,7 +3,7 @@ name: Menu Generator
 slug: 3x1io-tomato-menus
 author_slug: 3x1io
 categories: [developer-tool]
-description: Menu View Generator Using View Component
+description: Menu Database builder to use it as a navigation on Filament Panel or as a Livewire Component
 discord_url: 
 docs_url: https://raw.githubusercontent.com/tomatophp/filament-menus/master/README.md
 github_repository: tomatophp/filament-menus
