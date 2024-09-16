@@ -1,0 +1,29 @@
+{
+    "name": "FilamentMenus",
+    "alias": "filament-menus",
+    "description": {
+        "ar": "قم ببناء قائمتك باستخدام قاعدة البيانات",
+        "en": "Menu Database builder to use it as a navigation on Filament Panel or as a Livewire Component",
+        "gr": "Menu Database builder to use it as a navigation on Filament Panel or as a Livewire Component",
+        "sp": "Menu Database builder to use it as a navigation on Filament Panel or as a Livewire Component"
+    },
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "TomatoPHP\\FilamentMenus\\FilamentMenusServiceProvider"
+    ],
+    "files": [],
+    "title": {
+        "ar": "القوائم",
+        "en": "Menu Generator",
+        "gr": "Menu Generator",
+        "sp": "Menu Generator"
+    },
+    "color": "#17b8d1",
+    "icon": "heroicon-c-bars-3",
+    "placeholder": "placeholder.webp",
+    "type": "plugin",
+    "version": "v1.0.6",
+    "github" : "https://github.com/tomatophp/filament-menus",
+    "docs" : "https://github.com/tomatophp/filament-menus"
+}
