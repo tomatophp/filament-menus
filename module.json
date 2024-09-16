@@ -21,7 +21,7 @@
     },
     "color": "#17b8d1",
     "icon": "heroicon-c-bars-3",
-    "placeholder": "placeholder.webp",
+    "placeholder": "https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/3x1io-tomato-menus.jpg",
     "type": "plugin",
     "version": "v1.0.6",
     "github" : "https://github.com/tomatophp/filament-menus",
