@@ -23,7 +23,7 @@
     "icon": "heroicon-c-bars-3",
     "placeholder": "https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/3x1io-tomato-menus.jpg",
     "type": "plugin",
-    "version": "v1.0.6",
+    "version": "v1.0.7",
     "github" : "https://github.com/tomatophp/filament-menus",
     "docs" : "https://github.com/tomatophp/filament-menus"
 }
