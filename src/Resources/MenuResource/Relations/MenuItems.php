@@ -91,7 +91,8 @@ class MenuItems extends RelationManager
                     ->deletable(false)
                     ->label(trans('filament-menus::messages.cols.item.title')),
                 Forms\Components\Toggle::make('is_route')
-                    ->default(true)
+                    ->hidden(!filament('filament-menus')::$allowRoute)
+                    ->default(false)
                     ->label(trans('filament-menus::messages.cols.item.is_route'))
                     ->required()
                     ->live(),
@@ -141,8 +142,7 @@ class MenuItems extends RelationManager
                     ])
                     ->label(trans('filament-menus::messages.cols.item.badge_color')),
                 IconPicker::make('icon')
-                    ->label(trans('filament-menus::messages.cols.item.icon'))
-                    ->required(),
+                    ->label(trans('filament-menus::messages.cols.item.icon')),
                 Forms\Components\Toggle::make('new_tab')
                     ->label(trans('filament-menus::messages.cols.item.target'))
                     ->required(),
