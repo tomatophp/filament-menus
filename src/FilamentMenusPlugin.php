@@ -19,6 +19,14 @@ class FilamentMenusPlugin implements Plugin
         return 'filament-menus';
     }
 
+    public static bool $allowRoute = true;
+
+    public function allowRoute(bool $condition = true): static
+    {
+        self::$allowRoute = $condition;
+        return $this;
+    }
+
     public function register(Panel $panel): void
     {
         if(class_exists(Module::class) && \Nwidart\Modules\Facades\Module::find('FilamentMenus')?->isEnabled()){
