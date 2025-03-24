@@ -4,7 +4,6 @@ namespace TomatoPHP\FilamentMenus\Tests\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use TomatoPHP\FilamentMenus\Tests\Models\Menu;
 use TomatoPHP\FilamentMenus\Tests\Models\MenuItem;
 
@@ -42,7 +41,7 @@ class MenuItemFactory extends Factory
         $menu = Menu::findOrFail($id);
 
         return $this->state([
-            'menu_id' => $menu->id
+            'menu_id' => $menu->id,
         ]);
     }
 }

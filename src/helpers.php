@@ -1,14 +1,14 @@
 <?php
 
-if(!function_exists('menu')){
-    function menu($key){
+if (! function_exists('menu')) {
+    function menu($key)
+    {
         $menu = \TomatoPHP\FilamentMenus\Models\Menu::where('key', $key)->where('activated', 1)->first();
 
-        if($menu){
+        if ($menu) {
             return collect($menu->menuItems);
 
-        }
-        else {
+        } else {
             return collect([]);
         }
     }

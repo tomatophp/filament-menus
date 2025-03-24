@@ -19,9 +19,9 @@ use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 use TomatoPHP\FilamentIcons\FilamentIconsServiceProvider;
-use TomatoPHP\FilamentTranslationComponent\FilamentTranslationComponentServiceProvider;
 use TomatoPHP\FilamentMenus\FilamentMenusServiceProvider;
 use TomatoPHP\FilamentMenus\Tests\Models\User;
+use TomatoPHP\FilamentTranslationComponent\FilamentTranslationComponentServiceProvider;
 
 #[WithEnv('DB_CONNECTION', 'testing')]
 abstract class TestCase extends BaseTestCase

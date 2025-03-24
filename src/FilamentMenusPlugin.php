@@ -4,11 +4,8 @@ namespace TomatoPHP\FilamentMenus;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Illuminate\View\View;
 use Nwidart\Modules\Module;
 use TomatoPHP\FilamentMenus\Resources\MenuResource;
-use TomatoPHP\FilamentTranslations\Http\Middleware\LanguageMiddleware;
-use TomatoPHP\FilamentTranslations\Resources\TranslationResource;
 
 class FilamentMenusPlugin implements Plugin
 {
@@ -24,22 +21,22 @@ class FilamentMenusPlugin implements Plugin
     public function allowRoute(bool $condition = true): static
     {
         self::$allowRoute = $condition;
+
         return $this;
     }
 
     public function register(Panel $panel): void
     {
-        if(class_exists(Module::class) && \Nwidart\Modules\Facades\Module::find('FilamentMenus')?->isEnabled()){
+        if (class_exists(Module::class) && \Nwidart\Modules\Facades\Module::find('FilamentMenus')?->isEnabled()) {
             $this->isActive = true;
-        }
-        else {
+        } else {
             $this->isActive = true;
         }
 
-        if($this->isActive) {
+        if ($this->isActive) {
             $panel
                 ->resources([
-                    MenuResource::class
+                    MenuResource::class,
                 ]);
         }
     }
@@ -51,6 +48,6 @@ class FilamentMenusPlugin implements Plugin
 
     public static function make(): static
     {
-        return new static();
+        return new static;
     }
 }

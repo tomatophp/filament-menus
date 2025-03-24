@@ -14,7 +14,7 @@ class MenuItem extends Model
 
     public array $translatable = [
         'title',
-        'badge'
+        'badge',
     ];
 
     protected $casts = [
@@ -31,7 +31,7 @@ class MenuItem extends Model
      *
      * @var string
      */
-    protected $table = "menu_items";
+    protected $table = 'menu_items';
 
     /**
      * The attributes that are mass assignable.
@@ -39,23 +39,22 @@ class MenuItem extends Model
      * @var array
      */
     protected $fillable = [
-        "menu_id",
-        "title",
-        "icon",
-        "badge_color",
-        "has_badge",
-        "has_badge_query",
-        "badge_table",
-        "badge_condation",
-        "badge",
-        "is_route",
-        "route",
-        "url",
-        "new_tab",
-        "permissions",
-        "order",
+        'menu_id',
+        'title',
+        'icon',
+        'badge_color',
+        'has_badge',
+        'has_badge_query',
+        'badge_table',
+        'badge_condation',
+        'badge',
+        'is_route',
+        'route',
+        'url',
+        'new_tab',
+        'permissions',
+        'order',
     ];
-
 
     public function menu()
     {
@@ -66,5 +65,4 @@ class MenuItem extends Model
     {
         return MenuItemFactory::new();
     }
-
 }

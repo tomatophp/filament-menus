@@ -16,19 +16,19 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
 
-            //Set Key To Get Menu
+            // Set Key To Get Menu
             $table->string('key')->unique();
 
-            //Where You Can See The Menu
+            // Where You Can See The Menu
             $table->string('location')->default('header');
 
-            //Title For The Menu
+            // Title For The Menu
             $table->string('title');
 
-            //Menu Item As Json
+            // Menu Item As Json
             $table->longText('items')->nullable();
 
-            //Are Menu Is Active?
+            // Are Menu Is Active?
             $table->boolean('activated')->default(0);
             $table->timestamps();
         });

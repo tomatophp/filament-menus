@@ -5,9 +5,8 @@ namespace TomatoPHP\FilamentMenus\Tests;
 use Filament\Tables\Actions\EditAction;
 use TomatoPHP\FilamentMenus\Resources\MenuResource;
 use TomatoPHP\FilamentMenus\Resources\MenuResource\Pages;
-use TomatoPHP\FilamentMenus\Tests\Models\User;
 use TomatoPHP\FilamentMenus\Tests\Models\Menu;
-use TomatoPHP\FilamentMenus\Tests\Models\MenuItem;
+use TomatoPHP\FilamentMenus\Tests\Models\User;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
@@ -119,7 +118,7 @@ it('can retrieve menu data', function () {
 });
 
 it('can validate edit menu input', function () {
-    $menu =  Menu::factory()->create();
+    $menu = Menu::factory()->create();
 
     livewire(Pages\ManageMenus::class, [
         'record' => $menu->getRouteKey(),
@@ -137,7 +136,7 @@ it('can validate edit menu input', function () {
 });
 
 it('can save menu data', function () {
-    $menu =  Menu::factory()->create();
+    $menu = Menu::factory()->create();
     $newData = Menu::factory()->make();
 
     livewire(Pages\ManageMenus::class)
@@ -153,7 +152,7 @@ it('can save menu data', function () {
 });
 
 it('can delete type', function () {
-    $menu =  Menu::factory()->create();
+    $menu = Menu::factory()->create();
 
     livewire(Pages\ManageMenus::class)
         ->callTableAction('delete', $menu)

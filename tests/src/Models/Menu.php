@@ -15,7 +15,7 @@ class Menu extends Model
      *
      * @var string
      */
-    protected $table = "menus";
+    protected $table = 'menus';
 
     /**
      * The attributes that are mass assignable.
@@ -23,17 +23,16 @@ class Menu extends Model
      * @var array
      */
     protected $fillable = [
-        "key",
-        "location",
-        "title",
-        "items",
-        "activated",
+        'key',
+        'location',
+        'title',
+        'items',
+        'activated',
     ];
 
     protected $casts = [
-        "items" => "array"
+        'items' => 'array',
     ];
-
 
     public function menuItems()
     {
@@ -44,5 +43,4 @@ class Menu extends Model
     {
         return MenuFactory::new();
     }
-
 }

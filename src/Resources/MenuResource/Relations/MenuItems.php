@@ -3,16 +3,14 @@
 namespace TomatoPHP\FilamentMenus\Resources\MenuResource\Relations;
 
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
-use Filament\Forms\Form;
 use Filament\Forms;
-use Filament\Resources\RelationManagers\Concerns\Translatable;
+use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
-use TomatoPHP\FilamentIcons\Components\IconColumn;
 use TomatoPHP\FilamentIcons\Components\IconPicker;
 use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 
@@ -52,19 +50,19 @@ class MenuItems extends RelationManager
         foreach ($routeCollection as $key => $route) {
             if (isset($route->action['as'])) {
                 $routeList[] = [
-                    "name" =>$route->action['as'],
-                    "url" => $route->uri
+                    'name' => $route->action['as'],
+                    'url' => $route->uri,
                 ];
             } else {
                 $routeList[] = [
-                    "name" => $route->uri,
-                    "url" => $route->uri
+                    'name' => $route->uri,
+                    'url' => $route->uri,
                 ];
             }
         }
 
         $repeaterSchema = [];
-        if(class_exists(FilamentShieldPlugin::class)){
+        if (class_exists(FilamentShieldPlugin::class)) {
             $repeaterSchema[] = Forms\Components\Select::make('permissions')
                 ->label(trans('filament-menus::messages.cols.item.permissions'))
                 ->searchable()
@@ -74,7 +72,7 @@ class MenuItems extends RelationManager
 
         $localsTitle = [];
         $localsBadge = [];
-        foreach (config('filament-menus.locals') as $key=>$local){
+        foreach (config('filament-menus.locals') as $key => $local) {
             $localsTitle[] = Forms\Components\TextInput::make($key)
                 ->label($local[app()->getLocale()])
                 ->required();
@@ -82,25 +80,26 @@ class MenuItems extends RelationManager
                 ->label($local[app()->getLocale()])
                 ->required();
         }
+
         return $form->schema([
-            Forms\Components\Grid::make(["default" => 1])->schema(array_merge([
+            Forms\Components\Grid::make(['default' => 1])->schema(array_merge([
                 Translation::make('title')
                     ->label(trans('filament-menus::messages.cols.item.title')),
                 Forms\Components\Toggle::make('is_route')
-                    ->hidden(!filament('filament-menus')::$allowRoute)
+                    ->hidden(! filament('filament-menus')::$allowRoute)
                     ->default(false)
                     ->label(trans('filament-menus::messages.cols.item.is_route'))
                     ->required()
                     ->live(),
                 Forms\Components\TextInput::make('url')
                     ->label(trans('filament-menus::messages.cols.item.url'))
-                    ->hidden(fn(Forms\Get $get) => $get('is_route') === true)
-                    ->required(fn(Forms\Get $get) => $get('is_route') === false)
+                    ->hidden(fn (Forms\Get $get) => $get('is_route') === true)
+                    ->required(fn (Forms\Get $get) => $get('is_route') === false)
                     ->maxLength(255),
                 Forms\Components\Select::make('route')
                     ->label(trans('filament-menus::messages.cols.item.route'))
-                    ->hidden(fn(Forms\Get $get) => $get('is_route') === false)
-                    ->required(fn(Forms\Get $get) => $get('is_route') === true)
+                    ->hidden(fn (Forms\Get $get) => $get('is_route') === false)
+                    ->required(fn (Forms\Get $get) => $get('is_route') === true)
                     ->searchable()
                     ->options(collect($routeList)->pluck('url', 'name')->toArray()),
                 Forms\Components\Toggle::make('has_badge')
@@ -109,26 +108,26 @@ class MenuItems extends RelationManager
                     ->required()
                     ->live(),
                 Translation::make('badge')
-                    ->hidden(fn(Forms\Get $get) => $get('has_badge') === false)
+                    ->hidden(fn (Forms\Get $get) => $get('has_badge') === false)
                     ->label(trans('filament-menus::messages.cols.item.badge')),
-//                Forms\Components\TextInput::make('badge_model')
-//                    ->hidden(fn(Forms\Get $get) => $get('has_badge') === false)
-//                    ->maxLength(255)
-//                    ->label(trans('filament-menus::messages.cols.item.badge_model')),
-//                Forms\Components\TextInput::make('badge_condation')
-//                    ->hidden(fn(Forms\Get $get) => $get('has_badge') === false)
-//                    ->maxLength(255)
-//                    ->label(trans('filament-menus::messages.cols.item.badge_condation')),
+                //                Forms\Components\TextInput::make('badge_model')
+                //                    ->hidden(fn(Forms\Get $get) => $get('has_badge') === false)
+                //                    ->maxLength(255)
+                //                    ->label(trans('filament-menus::messages.cols.item.badge_model')),
+                //                Forms\Components\TextInput::make('badge_condation')
+                //                    ->hidden(fn(Forms\Get $get) => $get('has_badge') === false)
+                //                    ->maxLength(255)
+                //                    ->label(trans('filament-menus::messages.cols.item.badge_condation')),
                 Forms\Components\Select::make('badge_color')
-                    ->hidden(fn(Forms\Get $get) => $get('has_badge') === false)
+                    ->hidden(fn (Forms\Get $get) => $get('has_badge') === false)
                     ->searchable()
                     ->options([
-                        "primary" => "Primary",
-                        "secondary" => "Secondary",
-                        "success" => "Success",
-                        "danger" => "Danger",
-                        "warning" => "Warning",
-                        "info" => "Info"
+                        'primary' => 'Primary',
+                        'secondary' => 'Secondary',
+                        'success' => 'Success',
+                        'danger' => 'Danger',
+                        'warning' => 'Warning',
+                        'info' => 'Info',
                     ])
                     ->label(trans('filament-menus::messages.cols.item.badge_color')),
                 IconPicker::make('icon')
@@ -136,7 +135,7 @@ class MenuItems extends RelationManager
                 Forms\Components\Toggle::make('new_tab')
                     ->label(trans('filament-menus::messages.cols.item.target'))
                     ->required(),
-    ], $repeaterSchema))
+            ], $repeaterSchema)),
         ]);
     }
 
@@ -144,19 +143,19 @@ class MenuItems extends RelationManager
     {
         return $table
             ->headerActions([
-                Tables\Actions\CreateAction::make()
+                Tables\Actions\CreateAction::make(),
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('Menu')
-                    ->view('filament-menus::menu-item-column')
+                    ->view('filament-menus::menu-item-column'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make()
+                Tables\Actions\DeleteBulkAction::make(),
             ])
             ->defaultSort('order', 'asc')
             ->reorderable('order');

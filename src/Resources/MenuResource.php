@@ -2,25 +2,18 @@
 
 namespace TomatoPHP\FilamentMenus\Resources;
 
-use App\Forms\Components\Translation;
-use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Filters\Filter;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
-use Spatie\Permission\Models\Permission;
-use TomatoPHP\FilamentIcons\Components\IconPicker;
 use TomatoPHP\FilamentMenus\Models\Menu;
-use Filament\Tables;
-use Filament\Forms\Components\Grid;
-use Filament\Tables\Filters\Filter;
-use Illuminate\Support\Facades\Route;
 use TomatoPHP\FilamentMenus\Resources\MenuResource\Pages;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use TomatoPHP\FilamentMenus\Resources\MenuResource\Relations\MenuItems;
 
 class MenuResource extends Resource
@@ -29,7 +22,7 @@ class MenuResource extends Resource
 
     protected static ?string $slug = 'menus';
 
-    protected static ?string $recordTitleAttribute = "title";
+    protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $navigationIcon = 'heroicon-o-bars-3';
 
@@ -58,7 +51,7 @@ class MenuResource extends Resource
     public static function getRelations(): array
     {
         return [
-            MenuItems::make()
+            MenuItems::make(),
         ];
     }
 
@@ -66,7 +59,7 @@ class MenuResource extends Resource
     {
         return $form
             ->schema([
-                Grid::make(["default" => 3])->schema([
+                Grid::make(['default' => 3])->schema([
                     Forms\Components\TextInput::make('title')
                         ->label(trans('filament-menus::messages.cols.title'))
                         ->required()
@@ -84,7 +77,7 @@ class MenuResource extends Resource
                         ->default(true)
                         ->label(trans('filament-menus::messages.cols.activated'))
                         ->required(),
-                ])
+                ]),
             ]);
     }
 
@@ -95,12 +88,12 @@ class MenuResource extends Resource
                 Tables\Actions\Action::make('view')
                     ->icon('heroicon-o-eye')
                     ->color('info')
-                    ->modalContent(fn($record) => new HtmlString(Blade::render('<x-filament-menu menu="'.$record->key.'" />')))
+                    ->modalContent(fn ($record) => new HtmlString(Blade::render('<x-filament-menu menu="' . $record->key . '" />')))
                     ->modalFooter(null)
                     ->iconButton()
                     ->tooltip(__('filament-actions::view.single.label')),
                 EditAction::make()->iconButton()->tooltip(__('filament-actions::edit.single.label')),
-                DeleteAction::make()->iconButton()->tooltip(__('filament-actions::delete.single.label'))
+                DeleteAction::make()->iconButton()->tooltip(__('filament-actions::delete.single.label')),
             ])
             ->deferLoading()
             ->columns([
@@ -111,8 +104,8 @@ class MenuResource extends Resource
                 Tables\Columns\TextColumn::make('key')
                     ->copyable()
                     ->color('danger')
-                    ->formatStateUsing(fn($record) => '<x-filament-menu menu="'.$record->key.'" />')
-                    ->copyableState(fn($record) => '<x-filament-menu menu="'.$record->key.'" />')
+                    ->formatStateUsing(fn ($record) => '<x-filament-menu menu="' . $record->key . '" />')
+                    ->copyableState(fn ($record) => '<x-filament-menu menu="' . $record->key . '" />')
                     ->label(trans('filament-menus::messages.cols.component'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('location')
@@ -122,12 +115,12 @@ class MenuResource extends Resource
                     ->label(trans('filament-menus::messages.cols.activated')),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make()
+                Tables\Actions\DeleteBulkAction::make(),
             ])
             ->filters([
                 Filter::make('activated')
                     ->label(trans('filament-menus::messages.filters.activated'))
-                    ->query(fn (Builder $query): Builder => $query->where('activated', true))
+                    ->query(fn (Builder $query): Builder => $query->where('activated', true)),
             ]);
 
     }

@@ -12,18 +12,16 @@ class Menu extends Component
     public function __construct(
         public string $menu,
         public ?string $view = 'filament-menus::menu',
-    )
-    {
+    ) {
         $menu = \TomatoPHP\FilamentMenus\Models\Menu::where('key', $menu)->first();
         $this->menuItems = collect($menu->menuItems ?? []);
     }
 
     public function render()
     {
-        if(view()->exists($this->view)) {
+        if (view()->exists($this->view)) {
             return view($this->view);
-        }
-        else {
+        } else {
             return view('filament-menus::menu');
         }
     }

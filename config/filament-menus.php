@@ -1,14 +1,14 @@
 <?php
 
 return [
-    "locals" => [
-        "ar" => [
-            "ar" => "العربية",
-            "en" => "الإنجليزية"
+    'locals' => [
+        'ar' => [
+            'ar' => 'العربية',
+            'en' => 'الإنجليزية',
         ],
-        "en" => [
-            "ar" => "Arabic",
-            "en" => "English"
-        ]
-    ]
+        'en' => [
+            'ar' => 'Arabic',
+            'en' => 'English',
+        ],
+    ],
 ];

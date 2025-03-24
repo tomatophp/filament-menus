@@ -3,7 +3,6 @@
 namespace TomatoPHP\FilamentMenus\Tests\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use TomatoPHP\FilamentMenus\Tests\Models\Menu;
 
 class MenuFactory extends Factory
