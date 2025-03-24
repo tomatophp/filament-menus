@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 use TomatoPHP\FilamentIcons\Components\IconColumn;
 use TomatoPHP\FilamentIcons\Components\IconPicker;
+use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 
 class MenuItems extends RelationManager
 {
@@ -83,12 +84,7 @@ class MenuItems extends RelationManager
         }
         return $form->schema([
             Forms\Components\Grid::make(["default" => 1])->schema(array_merge([
-                Forms\Components\KeyValue::make('title')
-                    ->schema($localsTitle)
-                    ->keyLabel(trans('filament-menus::messages.cols.item.language'))
-                    ->editableKeys(false)
-                    ->addable(false)
-                    ->deletable(false)
+                Translation::make('title')
                     ->label(trans('filament-menus::messages.cols.item.title')),
                 Forms\Components\Toggle::make('is_route')
                     ->hidden(!filament('filament-menus')::$allowRoute)
@@ -112,15 +108,9 @@ class MenuItems extends RelationManager
                     ->label(trans('filament-menus::messages.cols.item.has_badge'))
                     ->required()
                     ->live(),
-                Forms\Components\KeyValue::make('badge')
+                Translation::make('badge')
                     ->hidden(fn(Forms\Get $get) => $get('has_badge') === false)
-                    ->schema($localsBadge)
-                    ->keyLabel(trans('filament-menus::messages.cols.item.language'))
-                    ->editableKeys(false)
-                    ->addable(false)
-                    ->deletable(false)
                     ->label(trans('filament-menus::messages.cols.item.badge')),
-// TODO: Implement badge model and condition
 //                Forms\Components\TextInput::make('badge_model')
 //                    ->hidden(fn(Forms\Get $get) => $get('has_badge') === false)
 //                    ->maxLength(255)

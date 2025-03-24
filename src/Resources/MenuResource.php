@@ -10,6 +10,8 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\HtmlString;
 use Spatie\Permission\Models\Permission;
 use TomatoPHP\FilamentIcons\Components\IconPicker;
 use TomatoPHP\FilamentMenus\Models\Menu;
@@ -88,31 +90,39 @@ class MenuResource extends Resource
 
     public static function table(Tables\Table $table): Tables\Table
     {
-
-        $table->actions([
-            ActionGroup::make([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make()
-            ]),
-        ]);
-
         return $table
-            ->recordAction(null)
+            ->actions([
+                Tables\Actions\Action::make('view')
+                    ->icon('heroicon-o-eye')
+                    ->color('info')
+                    ->modalContent(fn($record) => new HtmlString(Blade::render('<x-filament-menu menu="'.$record->key.'" />')))
+                    ->modalFooter(null)
+                    ->iconButton()
+                    ->tooltip(__('filament-actions::view.single.label')),
+                EditAction::make()->iconButton()->tooltip(__('filament-actions::edit.single.label')),
+                DeleteAction::make()->iconButton()->tooltip(__('filament-actions::delete.single.label'))
+            ])
+            ->deferLoading()
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label(trans('filament-menus::messages.cols.title'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('key')
+                    ->copyable()
+                    ->color('danger')
+                    ->formatStateUsing(fn($record) => '<x-filament-menu menu="'.$record->key.'" />')
+                    ->copyableState(fn($record) => '<x-filament-menu menu="'.$record->key.'" />')
                     ->label(trans('filament-menus::messages.cols.component'))
-                    ->view('filament-menus::menu-item')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('location')
                     ->label(trans('filament-menus::messages.cols.location'))
                     ->sortable(),
-                Tables\Columns\BooleanColumn::make('activated')
+                Tables\Columns\ToggleColumn::make('activated')
                     ->label(trans('filament-menus::messages.cols.activated')),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make()
             ])
             ->filters([
                 Filter::make('activated')
