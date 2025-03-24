@@ -89,7 +89,6 @@ class MenuResource extends Resource
                     ->icon('heroicon-o-eye')
                     ->color('info')
                     ->modalContent(fn ($record) => new HtmlString(Blade::render('<x-filament-menu menu="' . $record->key . '" />')))
-                    ->modalFooter(null)
                     ->iconButton()
                     ->tooltip(__('filament-actions::view.single.label')),
                 EditAction::make()->iconButton()->tooltip(__('filament-actions::edit.single.label')),

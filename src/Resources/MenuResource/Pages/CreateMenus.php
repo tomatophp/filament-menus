@@ -9,7 +9,6 @@ class CreateMenus extends CreateRecord
 {
     protected static string $resource = MenuResource::class;
 
-    #[Reactive]
     public ?string $local = 'en';
 
     public function setLocal($local)

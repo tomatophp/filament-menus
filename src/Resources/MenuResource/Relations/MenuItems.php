@@ -67,7 +67,7 @@ class MenuItems extends RelationManager
                 ->label(trans('filament-menus::messages.cols.item.permissions'))
                 ->searchable()
                 ->multiple()
-                ->options(Permission::all()->pluck('name', 'name')->toArray());
+                ->options(class_exists(Permission::class) ? Permission::query()->get()->pluck('name', 'name')->toArray() : []);
         }
 
         $localsTitle = [];
