@@ -3,6 +3,8 @@
 namespace TomatoPHP\FilamentMenus;
 
 use Illuminate\Support\ServiceProvider;
+use TomatoPHP\FilamentMenus\Console\FilamentMenusInstall;
+use TomatoPHP\FilamentMenus\Views\Menu;
 
 require_once __DIR__ . '/helpers.php';
 
@@ -12,7 +14,7 @@ class FilamentMenusServiceProvider extends ServiceProvider
     {
         // Register generate command
         $this->commands([
-            \TomatoPHP\FilamentMenus\Console\FilamentMenusInstall::class,
+            FilamentMenusInstall::class,
         ]);
 
         // Register Config file
@@ -50,7 +52,7 @@ class FilamentMenusServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
         $this->loadViewComponentsAs('filament', [
-            \TomatoPHP\FilamentMenus\Views\Menu::class,
+            Menu::class,
         ]);
 
     }
