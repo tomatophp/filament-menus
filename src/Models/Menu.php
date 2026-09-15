@@ -4,6 +4,7 @@ namespace TomatoPHP\FilamentMenus\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use TomatoPHP\FilamentMenus\Database\Factories\MenuFactory;
 
 class Menu extends Model
 {
@@ -36,5 +37,10 @@ class Menu extends Model
     public function menuItems()
     {
         return $this->hasMany(MenuItem::class, 'menu_id', 'id');
+    }
+
+    protected static function newFactory(): MenuFactory
+    {
+        return MenuFactory::new();
     }
 }

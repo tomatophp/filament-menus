@@ -7,9 +7,9 @@ fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded
 ">
         @if(isset($item['icon']) && !empty($item['icon']))
             @if(url()->current() === ($item['route']?route($item['route']): $item['url']))
-                <x-icon class="fi-sidebar-item-icon w-5 h-5 text-primary-600 dark:text-primary-400" name="{{ $item['icon'] }}"></x-icon>
+                <x-icon class="fi-sidebar-item-icon w-5 h-5 text-primary-600 dark:text-primary-400" style="width: 1.25rem; height: 1.25rem;" name="{{ $item['icon'] }}"></x-icon>
             @else
-                <x-icon class="fi-sidebar-item-icon w-5 h-5 text-gray-700 dark:text-gray-200" name="{{ $item['icon'] }}"></x-icon>
+                <x-icon class="fi-sidebar-item-icon w-5 h-5 text-gray-700 dark:text-gray-200" style="width: 1.25rem; height: 1.25rem;" name="{{ $item['icon'] }}"></x-icon>
             @endif
         @endif
 
@@ -21,16 +21,13 @@ fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded
                 text-gray-700 dark:text-gray-200
             @endif
         ">
-            {{ $item['title'][app()->getLocale()] }}
+            {{ $item->localized('title') }}
         </span>
 
-        @if($item['has_badge'])
+        @if($item['has_badge'] && filled($item->localized('badge')))
             <x-filament::badge :color="$item['badge_color']">
-                {{ $item['badge'][app()->getLocale()] }}
+                {{ $item->localized('badge') }}
             </x-filament::badge>
         @endif
     </a>
 @endforeach
-
-
-

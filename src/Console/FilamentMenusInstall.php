@@ -35,7 +35,6 @@ class FilamentMenusInstall extends Command
      */
     public function handle()
     {
-        $this->artisanCommand(['livewire:discover']);
         $this->artisanCommand(['migrate']);
         $this->artisanCommand(['optimize:clear']);
         $this->info('Filament Menus installed successfully.');

@@ -2,9 +2,9 @@
 
 namespace TomatoPHP\FilamentMenus\Tests\Models;
 
-use Filament\Resources\Concerns\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 use TomatoPHP\FilamentMenus\Tests\Database\Factories\MenuItemFactory;
 
 class MenuItem extends Model

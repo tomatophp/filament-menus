@@ -2,9 +2,9 @@
 
 namespace TomatoPHP\FilamentMenus\Tests;
 
-use Filament\Tables\Actions\EditAction;
+use Filament\Actions\EditAction;
 use TomatoPHP\FilamentMenus\Resources\MenuResource;
-use TomatoPHP\FilamentMenus\Resources\MenuResource\Pages;
+use TomatoPHP\FilamentMenus\Resources\MenuResource\Pages\ManageMenus;
 use TomatoPHP\FilamentMenus\Tests\Models\Menu;
 use TomatoPHP\FilamentMenus\Tests\Models\User;
 
@@ -26,7 +26,7 @@ it('can list menus', function () {
     Menu::query()->delete();
     $menus = Menu::factory()->count(10)->create();
 
-    livewire(Pages\ManageMenus::class)
+    livewire(ManageMenus::class)
         ->loadTable()
         ->assertCanSeeTableRecords($menus)
         ->assertCountTableRecords(10);
@@ -35,7 +35,7 @@ it('can list menus', function () {
 it('can render menu title/key/location/activated column in table', function () {
     Menu::factory()->count(10)->create();
 
-    livewire(Pages\ManageMenus::class)
+    livewire(ManageMenus::class)
         ->loadTable()
         ->assertCanRenderTableColumn('title')
         ->assertCanRenderTableColumn('key')
@@ -44,11 +44,11 @@ it('can render menu title/key/location/activated column in table', function () {
 });
 
 it('can render menu list page', function () {
-    livewire(Pages\ManageMenus::class)->assertSuccessful();
+    livewire(ManageMenus::class)->assertSuccessful();
 });
 
 it('can render view menu page', function () {
-    livewire(Pages\ManageMenus::class, [
+    livewire(ManageMenus::class, [
         'record' => User::factory()->create(),
     ])
         ->mountAction('view')
@@ -56,7 +56,7 @@ it('can render view menu page', function () {
 });
 
 it('can render menu create page', function () {
-    livewire(Pages\ManageMenus::class)
+    livewire(ManageMenus::class)
         ->mountAction('create')
         ->assertSuccessful();
 });
@@ -64,7 +64,7 @@ it('can render menu create page', function () {
 it('can create new menu', function () {
     $newData = Menu::factory()->make();
 
-    livewire(Pages\ManageMenus::class)
+    livewire(ManageMenus::class)
         ->callAction('create', data: [
             'title' => $newData->title,
             'key' => $newData->key,
@@ -82,7 +82,7 @@ it('can create new menu', function () {
 });
 
 it('can validate menu input', function () {
-    livewire(Pages\ManageMenus::class)
+    livewire(ManageMenus::class)
         ->callAction('create', data: [
             'title' => null,
             'key' => null,
@@ -96,7 +96,7 @@ it('can validate menu input', function () {
 });
 
 it('can render menu edit page', function () {
-    livewire(Pages\ManageMenus::class, [
+    livewire(ManageMenus::class, [
         'record' => Menu::factory()->create(),
     ])
         ->mountAction('edit')
@@ -106,7 +106,7 @@ it('can render menu edit page', function () {
 it('can retrieve menu data', function () {
     $menu = Menu::factory()->create();
 
-    livewire(Pages\ManageMenus::class)
+    livewire(ManageMenus::class)
         ->mountTableAction(EditAction::class, $menu)
         ->assertTableActionDataSet([
             'title' => $menu->title,
@@ -120,7 +120,7 @@ it('can retrieve menu data', function () {
 it('can validate edit menu input', function () {
     $menu = Menu::factory()->create();
 
-    livewire(Pages\ManageMenus::class, [
+    livewire(ManageMenus::class, [
         'record' => $menu->getRouteKey(),
     ])
         ->callTableAction('edit', $menu, [
@@ -139,7 +139,7 @@ it('can save menu data', function () {
     $menu = Menu::factory()->create();
     $newData = Menu::factory()->make();
 
-    livewire(Pages\ManageMenus::class)
+    livewire(ManageMenus::class)
         ->callTableAction('edit', $menu, data: [
             'title' => $newData->title,
             'key' => $newData->key,
@@ -154,7 +154,7 @@ it('can save menu data', function () {
 it('can delete type', function () {
     $menu = Menu::factory()->create();
 
-    livewire(Pages\ManageMenus::class)
+    livewire(ManageMenus::class)
         ->callTableAction('delete', $menu)
         ->assertHasNoTableActionErrors();
 

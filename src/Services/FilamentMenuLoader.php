@@ -5,6 +5,7 @@ namespace TomatoPHP\FilamentMenus\Services;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Navigation\NavigationItem;
 use TomatoPHP\FilamentMenus\Models\Menu;
+use TomatoPHP\FilamentMenus\Models\MenuItem;
 
 class FilamentMenuLoader
 {
@@ -34,24 +35,14 @@ class FilamentMenuLoader
         $navItems = [];
 
         foreach ($this->menu as $menu) {
-            if (class_exists(FilamentShieldPlugin::class) && count($menu->permissions)) {
+            if (class_exists(FilamentShieldPlugin::class) && count($menu->permissions ?? [])) {
                 if (auth()->user()->hasAnyPermission($menu->permissions)) {
-                    $menuItem = NavigationItem::make()
-                        ->label($menu->title[app()->getLocale()])
-                        ->isActiveWhen(fn (): bool => url()->current() === ($menu->is_route ? route($menu->route) : $menu->url))
-                        ->icon($menu->icon)
-                        ->badge($menu->badge ? $menu->badge[app()->getLocale()] : null, $menu->badge_color)
-                        ->url($menu->is_route ? route($menu->route) : $menu->url);
+                    $menuItem = $this->navigationItem($menu);
                 } else {
                     continue;
                 }
             } else {
-                $menuItem = NavigationItem::make()
-                    ->label($menu->title[app()->getLocale()])
-                    ->isActiveWhen(fn (): bool => url()->current() === ($menu->is_route ? route($menu->route) : $menu->url))
-                    ->icon($menu->icon)
-                    ->badge($menu->badge ? $menu->badge[app()->getLocale()] : null, $menu->badge_color)
-                    ->url($menu->is_route ? route($menu->route) : $menu->url);
+                $menuItem = $this->navigationItem($menu);
             }
 
             if ($menu->new_tab) {
@@ -62,5 +53,15 @@ class FilamentMenuLoader
         }
 
         return $navItems;
+    }
+
+    protected function navigationItem(MenuItem $menu): NavigationItem
+    {
+        return NavigationItem::make()
+            ->label($menu->localized('title') ?? '')
+            ->isActiveWhen(fn (): bool => url()->current() === ($menu->is_route ? route($menu->route) : $menu->url))
+            ->icon($menu->icon)
+            ->badge($menu->has_badge ? $menu->localized('badge') : null, $menu->badge_color)
+            ->url($menu->is_route ? route($menu->route) : $menu->url);
     }
 }

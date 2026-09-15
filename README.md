@@ -11,11 +11,21 @@
 
 Menu Database builder to use it as a navigation on Filament Panel or as a Livewire Component
 
+## Requirements
+
+| Package version | Filament | Laravel     | PHP  |
+|-----------------|----------|-------------|------|
+| 5.x             | 5.x      | 12.x, 13.x  | 8.2+ |
+| 2.x             | 3.x      | 10.x, 11.x  | 8.2+ |
+
 ## Screenshots
 
 ![Menus List](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/resource.png)
+![Menus List Dark](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/resource-dark.png)
 ![Edit Menu](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/edit.png)
-![Menu Items](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/create-item.png)
+![Edit Menu Dark](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/edit-dark.png)
+![Create Menu](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/create.png)
+![Create Menu Dark](https://raw.githubusercontent.com/tomatophp/filament-menus/master/arts/create-dark.png)
 
 ## Installation
 
@@ -28,13 +38,13 @@ after install your package please run this command
 php artisan filament-menus:install
 ```
 
-finally register the plugin on `/app/Providers/Filament/AdminPanelProvider.php`
+finally register the plugins on `/app/Providers/Filament/AdminPanelProvider.php`
 
 ```php
-->plugins(
-    \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'ar'])
-    \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make()
-)
+->plugins([
+    \LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin::make()->defaultLocales(['en', 'ar']),
+    \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make(),
+])
 ```
 
 ## Use as Filament Navigation
@@ -44,7 +54,7 @@ you can use this package as a navigation on Filament Admin Panel
 ```php
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationGroup;
-use TomatoPHP\FilamentMenus\FilamentMenuLoader;
+use TomatoPHP\FilamentMenus\Services\FilamentMenuLoader;
 
 $panel->navigation(function (NavigationBuilder $builder){
     return $builder

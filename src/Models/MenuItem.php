@@ -2,9 +2,10 @@
 
 namespace TomatoPHP\FilamentMenus\Models;
 
-use Filament\Resources\Concerns\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
+use TomatoPHP\FilamentMenus\Database\Factories\MenuItemFactory;
 
 class MenuItem extends Model
 {
@@ -59,5 +60,26 @@ class MenuItem extends Model
     public function menu()
     {
         return $this->belongsTo(Menu::class, 'menu_id', 'id');
+    }
+
+    /**
+     * A translated attribute in the app locale, falling back to the fallback locale, then any locale.
+     */
+    public function localized(string $attribute): ?string
+    {
+        $value = $this->getAttribute($attribute);
+
+        if (! is_array($value)) {
+            return filled($value) ? (string) $value : null;
+        }
+
+        $translation = $value[app()->getLocale()] ?? $value[config('app.fallback_locale')] ?? (reset($value) ?: null);
+
+        return filled($translation) ? (string) $translation : null;
+    }
+
+    protected static function newFactory(): MenuItemFactory
+    {
+        return MenuItemFactory::new();
     }
 }

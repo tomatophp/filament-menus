@@ -2,18 +2,26 @@
 
 namespace TomatoPHP\FilamentMenus\Resources;
 
-use Filament\Forms;
-use Filament\Forms\Components\Grid;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
 use TomatoPHP\FilamentMenus\Models\Menu;
-use TomatoPHP\FilamentMenus\Resources\MenuResource\Pages;
+use TomatoPHP\FilamentMenus\Resources\MenuResource\Pages\CreateMenus;
+use TomatoPHP\FilamentMenus\Resources\MenuResource\Pages\EditMenus;
+use TomatoPHP\FilamentMenus\Resources\MenuResource\Pages\ManageMenus;
 use TomatoPHP\FilamentMenus\Resources\MenuResource\Relations\MenuItems;
 
 class MenuResource extends Resource
@@ -24,9 +32,9 @@ class MenuResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationIcon = 'heroicon-o-bars-3';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-bars-3';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static string | \UnitEnum | null $navigationGroup = 'Settings';
 
     public static function getNavigationLabel(): string
     {
@@ -55,25 +63,25 @@ class MenuResource extends Resource
         ];
     }
 
-    public static function form(Forms\Form $form): Forms\Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Grid::make(['default' => 3])->schema([
-                    Forms\Components\TextInput::make('title')
+                    TextInput::make('title')
                         ->label(trans('filament-menus::messages.cols.title'))
                         ->required()
                         ->maxLength(255),
-                    Forms\Components\TextInput::make('key')
+                    TextInput::make('key')
                         ->label(trans('filament-menus::messages.cols.key'))
                         ->required()
                         ->maxLength(255),
-                    Forms\Components\TextInput::make('location')
+                    TextInput::make('location')
                         ->label(trans('filament-menus::messages.cols.location'))
                         ->required()
                         ->default('header')
                         ->maxLength(255),
-                    Forms\Components\Toggle::make('activated')
+                    Toggle::make('activated')
                         ->default(true)
                         ->label(trans('filament-menus::messages.cols.activated'))
                         ->required(),
@@ -81,11 +89,11 @@ class MenuResource extends Resource
             ]);
     }
 
-    public static function table(Tables\Table $table): Tables\Table
+    public static function table(Table $table): Table
     {
         return $table
-            ->actions([
-                Tables\Actions\Action::make('view')
+            ->recordActions([
+                Action::make('view')
                     ->icon('heroicon-o-eye')
                     ->color('info')
                     ->modalContent(fn ($record) => new HtmlString(Blade::render('<x-filament-menu menu="' . $record->key . '" />')))
@@ -96,25 +104,25 @@ class MenuResource extends Resource
             ])
             ->deferLoading()
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label(trans('filament-menus::messages.cols.title'))
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('key')
+                TextColumn::make('key')
                     ->copyable()
                     ->color('danger')
                     ->formatStateUsing(fn ($record) => '<x-filament-menu menu="' . $record->key . '" />')
                     ->copyableState(fn ($record) => '<x-filament-menu menu="' . $record->key . '" />')
                     ->label(trans('filament-menus::messages.cols.component'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('location')
+                TextColumn::make('location')
                     ->label(trans('filament-menus::messages.cols.location'))
                     ->sortable(),
-                Tables\Columns\ToggleColumn::make('activated')
+                ToggleColumn::make('activated')
                     ->label(trans('filament-menus::messages.cols.activated')),
             ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                DeleteBulkAction::make(),
             ])
             ->filters([
                 Filter::make('activated')
@@ -127,9 +135,9 @@ class MenuResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageMenus::route('/'),
-            'create' => Pages\CreateMenus::route('/create'),
-            'edit' => Pages\EditMenus::route('/{record}'),
+            'index' => ManageMenus::route('/'),
+            'create' => CreateMenus::route('/create'),
+            'edit' => EditMenus::route('/{record}'),
         ];
     }
 }
