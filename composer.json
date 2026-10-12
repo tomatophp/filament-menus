@@ -2,6 +2,12 @@
     "name": "tomatophp/filament-menus",
     "type": "library",
     "description": "Menu Database builder to use it as a navigation on Filament Panel or as a Livewire Component",
+    "homepage": "https://tomatophp.com/en/plugins/filament-menus",
+    "support": {
+        "issues": "https://github.com/tomatophp/filament-menus/issues",
+        "source": "https://github.com/tomatophp/filament-menus",
+        "docs": "https://tomatophp.com/en/plugins/filament-menus"
+    },
     "keywords": [
         "laravel",
         "menus",
